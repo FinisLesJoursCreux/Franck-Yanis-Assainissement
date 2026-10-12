@@ -1,0 +1,339 @@
+<!doctype html><html><head><meta charset=utf8><meta name=viewport content="width=device-width,initial-scale=1,viewport-fit=cover"><style>:root{color-scheme:light;box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}html{scroll-padding-top:env(safe-area-inset-top,0px)}body{margin:0;padding:0;font:14px -apple-system,BlinkMacSystemFont,sans-serif;background:#fff;color:#000}img{max-width:100%}[hidden]:not([hidden=until-found i]){display:none!important}</style></head><body>
+<title>Franck & Yanis Assainissement</title>
+<meta name="description" content="Développez une branche assainissement à partir de vos clients actuels. Simulateur de potentiel et audit gratuit, sans engagement.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,700;12..96,800&family=Figtree:wght@400;500;600;700&display=swap">
+<style>
+/* Layout : colonne courte pensée pour le téléphone, un seul accent bleu sur chiffres et actions */
+:root{
+  --bg:#ffffff;
+  --ink:#0b0d14;
+  --ink-2:#4a4f63;
+  --line:#e4e7f0;
+  --soft:#f4f6fc;
+  --blue:#1F4FFF;
+  --blue-dk:#1438c9;
+  --blue-soft:#e9eeff;
+  --warn-bg:#fff8e6;
+  --warn-ink:#6b4e00;
+  --f-display:"Bricolage Grotesque", "Arial Black", system-ui, sans-serif;
+  --f-body:"Figtree", system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
+  --wrap:1040px;
+  color-scheme:light;
+}
+*,*::before,*::after{box-sizing:border-box}
+html{scroll-behavior:smooth}
+@media (prefers-reduced-motion: reduce){html{scroll-behavior:auto}*{transition:none!important}}
+body{background:var(--bg);color:var(--ink);font-family:var(--f-body);font-size:16.5px;line-height:1.55;-webkit-font-smoothing:antialiased}
+.wrap{max-width:var(--wrap);margin:0 auto;padding-inline:20px}
+h1,h2,h3{font-family:var(--f-display);color:var(--ink);line-height:1.08;letter-spacing:-0.022em;margin:0;text-wrap:balance}
+h1{font-size:clamp(1.85rem,5vw,3.1rem);font-weight:800}
+h2{font-size:clamp(1.5rem,3.6vw,2.25rem);font-weight:800}
+h3{font-size:1.05rem;font-weight:700;letter-spacing:-0.01em}
+p{margin:0}
+.blue{color:var(--blue)}
+.eyebrow{font-size:.74rem;font-weight:700;letter-spacing:.12em;text-transform:uppercase;color:var(--blue)}
+.lead{font-size:clamp(1rem,1.8vw,1.1rem);color:var(--ink-2);max-width:60ch}
+:focus-visible{outline:3px solid var(--blue);outline-offset:3px;border-radius:6px}
+
+.btn{display:inline-flex;align-items:center;justify-content:center;gap:.55em;font:700 1rem/1 var(--f-body);text-decoration:none;border:0;cursor:pointer;border-radius:999px;padding:1em 1.5em;transition:background .2s, transform .2s;background:var(--blue);color:#fff}
+.btn:hover{background:var(--blue-dk);transform:translateY(-1px)}
+.btn svg{width:18px;height:18px}
+
+/* En-tête */
+.top{position:sticky;top:env(safe-area-inset-top,0px);z-index:20;background:rgba(255,255,255,.93);backdrop-filter:saturate(1.4) blur(10px);-webkit-backdrop-filter:saturate(1.4) blur(10px);border-bottom:1px solid var(--line)}
+.top .wrap{display:flex;align-items:center;justify-content:space-between;gap:12px;padding-block:10px}
+.brand{display:flex;align-items:center;gap:9px;text-decoration:none;color:var(--ink);min-width:0}
+.brand-mark{width:32px;height:32px;border-radius:9px;background:var(--blue);display:grid;place-items:center;flex:none}
+.brand-mark svg{width:19px;height:19px}
+.brand-name{font-family:var(--f-display);font-weight:800;font-size:1rem;line-height:1.05;letter-spacing:-0.01em}
+.brand-name small{display:block;font-family:var(--f-body);font-weight:600;font-size:.68rem;letter-spacing:.08em;text-transform:uppercase;color:var(--ink-2)}
+.top .btn{padding:.72em 1.05em;font-size:.86rem;white-space:nowrap}
+
+section{padding-block:clamp(40px,7vw,72px)}
+.sec-head{display:grid;gap:10px;margin-bottom:clamp(20px,3.5vw,32px);max-width:720px}
+
+/* 1. Intro */
+.hero{padding-block:clamp(28px,5vw,60px) clamp(32px,5vw,56px)}
+.hero .wrap{display:grid;gap:16px;justify-items:start}
+.badge{display:inline-block;background:var(--blue-soft);color:var(--blue);font-size:.72rem;font-weight:700;letter-spacing:.1em;text-transform:uppercase;padding:7px 12px;border-radius:99px}
+.hero h1{max-width:20ch}
+.services{font-size:.93rem;font-weight:600;color:var(--ink);display:flex;flex-wrap:wrap;gap:4px 10px}
+.services i{font-style:normal;color:var(--blue)}
+
+/* 2. Simulateur */
+.sim{background:var(--soft)}
+.sim-grid{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:16px;align-items:start}
+@media (max-width:820px){.sim-grid{grid-template-columns:1fr}}
+.panel{background:var(--bg);border:1px solid var(--line);border-radius:18px;padding:clamp(18px,3.5vw,28px);display:grid;gap:22px;min-width:0}
+.field{display:grid;gap:8px}
+.field-top{display:flex;justify-content:space-between;align-items:baseline;gap:12px}
+.field label,.field .lbl{font-weight:700;font-size:.95rem}
+.field .val{font-family:var(--f-display);font-weight:800;font-size:1.5rem;color:var(--blue);font-variant-numeric:tabular-nums;letter-spacing:-0.02em;flex:none}
+.tag{display:inline-block;font-size:.68rem;font-weight:700;letter-spacing:.08em;text-transform:uppercase;color:var(--blue);background:var(--blue-soft);padding:3px 7px;border-radius:6px;margin-right:6px;vertical-align:2px}
+.field .help{font-size:.84rem;color:var(--ink-2)}
+input[type=range]{-webkit-appearance:none;appearance:none;width:100%;height:8px;border-radius:99px;background:linear-gradient(90deg,var(--blue) 0 var(--p,50%),var(--line) var(--p,50%) 100%);outline:none;cursor:pointer;margin:6px 0}
+input[type=range]::-webkit-slider-thumb{-webkit-appearance:none;width:28px;height:28px;border-radius:50%;background:var(--bg);border:3px solid var(--blue);box-shadow:0 2px 8px rgba(31,79,255,.3)}
+input[type=range]::-moz-range-thumb{width:24px;height:24px;border-radius:50%;background:var(--bg);border:3px solid var(--blue);box-shadow:0 2px 8px rgba(31,79,255,.3)}
+input[type=range]:focus-visible::-webkit-slider-thumb{outline:3px solid var(--blue);outline-offset:3px}
+.scale{display:flex;justify-content:space-between;font-size:.76rem;color:var(--ink-2);font-variant-numeric:tabular-nums}
+.seg{display:grid;grid-template-columns:1fr 1fr;gap:6px;background:var(--soft);border-radius:12px;padding:5px}
+.seg input{position:absolute;opacity:0;pointer-events:none}
+.seg label{text-align:center;padding:12px 8px;border-radius:9px;font-weight:700;cursor:pointer;font-variant-numeric:tabular-nums;color:var(--ink-2);transition:background .2s,color .2s}
+.seg input:checked + label{background:var(--blue);color:#fff}
+.seg input:focus-visible + label{outline:3px solid var(--blue);outline-offset:2px}
+
+.results{background:var(--ink);color:#fff;border:0;gap:16px}
+.results .eyebrow{color:#9fb4ff}
+.res-pair{display:grid;grid-template-columns:1fr 1fr;gap:14px}
+.res-row{display:grid;gap:2px;min-width:0}
+.res-row .k{font-size:.86rem;color:#c9cde0}
+.res-big{font-family:var(--f-display);font-weight:800;font-size:clamp(1.7rem,5vw,2.6rem);letter-spacing:-0.03em;line-height:1.05;font-variant-numeric:tabular-nums;color:#fff;overflow-wrap:anywhere}
+.res-big.accent{color:#7f9bff}
+.res-mini{font-size:.92rem;color:#c9cde0;border-top:1px solid #262a3a;padding-top:14px}
+.res-mini strong{color:#fff;font-variant-numeric:tabular-nums}
+.formula{font-size:.8rem;color:#9ca2ba;font-variant-numeric:tabular-nums}
+.disclaimer{background:var(--warn-bg);color:var(--warn-ink);border-radius:10px;padding:11px 13px;font-size:.84rem;display:flex;gap:9px;align-items:flex-start;line-height:1.45}
+.disclaimer svg{width:17px;height:17px;flex:none;margin-top:2px}
+
+/* 3. Bénéfice */
+.gain-grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:12px}
+@media (max-width:640px){.gain-grid{grid-template-columns:1fr}}
+.gain{border:1px solid var(--line);border-radius:14px;padding:16px 18px;display:flex;align-items:center;gap:12px}
+.gain svg{width:26px;height:26px;color:var(--blue);flex:none}
+
+/* 4. Accompagnement + duo */
+.duo{padding-top:0}
+.duo-grid{display:grid;grid-template-columns:minmax(0,.85fr) minmax(0,1.15fr);gap:28px;align-items:center}
+@media (max-width:760px){.duo-grid{grid-template-columns:1fr;gap:22px}}
+.duo-photo{margin:0;display:grid;gap:12px}
+.duo-photo img{width:100%;max-width:100%;height:auto;aspect-ratio:1177/1156;border-radius:18px;display:block;background:var(--soft)}
+.steps li.with-media{display:grid;grid-template-columns:32px minmax(0,1fr);column-gap:14px;row-gap:12px;align-items:center}
+.steps li.with-media figure{grid-column:1 / -1;margin:0}
+.steps li.with-media img{width:100%;max-width:100%;height:auto;aspect-ratio:1200/607;border-radius:10px;display:block;background:var(--bg)}
+.steps li.with-media figcaption{font-size:.8rem;font-weight:500;color:var(--ink-2);margin-top:6px}.who{display:grid;grid-template-columns:1fr 1fr;gap:10px}
+.who p{font-size:.9rem;color:var(--ink-2);line-height:1.4}
+.who b{display:block;color:var(--ink);font-family:var(--f-display);font-size:1.05rem}
+.steps{list-style:none;margin:0;padding:0;display:grid;gap:10px;counter-reset:s}
+.steps li{counter-increment:s;display:flex;gap:14px;align-items:center;background:var(--soft);border-radius:14px;padding:14px 16px;font-weight:600}
+.steps li::before{content:counter(s);flex:none;width:32px;height:32px;border-radius:50%;background:var(--blue);color:#fff;display:grid;place-items:center;font-family:var(--f-display);font-weight:800;font-size:.95rem}
+.duo-copy{display:grid;gap:18px;min-width:0}
+
+/* 5. Conclusion + FAQ */
+.next{padding-top:0}
+.next-box{background:var(--blue);color:#fff;border-radius:20px;padding:clamp(22px,4vw,36px);display:grid;gap:10px}
+.next-box h2{color:#fff}
+.next-box p{color:#dfe6ff;max-width:60ch}
+.faq{padding-top:0}
+.faq-list{display:grid;gap:8px;max-width:760px}
+details{border:1px solid var(--line);border-radius:12px;padding:0 18px;background:var(--bg)}
+details[open]{border-color:var(--blue)}
+summary{list-style:none;cursor:pointer;padding:15px 0;font-weight:700;font-size:.98rem;display:flex;justify-content:space-between;gap:14px;align-items:center}
+summary::-webkit-details-marker{display:none}
+summary::after{content:"+";font-family:var(--f-display);font-size:1.5rem;line-height:1;color:var(--blue);flex:none;transition:transform .2s}
+details[open] summary::after{transform:rotate(45deg)}
+details p{padding-bottom:15px;color:var(--ink-2);font-size:.95rem}
+
+footer{border-top:1px solid var(--line);padding-block:26px;font-size:.85rem;color:var(--ink-2)}
+footer .wrap{display:flex;flex-wrap:wrap;justify-content:space-between;gap:10px}
+</style>
+
+<header class="top">
+  <div class="wrap">
+    <a class="brand" href="#top" aria-label="Franck & Yanis Assainissement, retour en haut">
+      <span class="brand-mark" aria-hidden="true">
+        <svg viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 9h7a4 4 0 0 1 4 4v8"/><path d="M3 5h7a8 8 0 0 1 8 8v8"/></svg>
+      </span>
+      <span class="brand-name">Franck &amp; Yanis<small>Assainissement</small></span>
+    </a>
+    <a class="btn" href="#simulateur">Simuler mon potentiel</a>
+  </div>
+</header>
+
+<main id="top">
+
+<!-- 1. INTRODUCTION -->
+<section class="hero">
+  <div class="wrap">
+    <span class="badge">Entreprises de plomberie &amp; du bâtiment</span>
+    <h1>Développez une branche assainissement <span class="blue">à partir de vos clients actuels.</span></h1>
+    <p class="lead">Franck et Yanis vous accompagnent sur le terrain et le développement commercial. Premier audit 100&nbsp;% gratuit et sans engagement.</p>
+    <a class="btn" href="#simulateur">Estimer mon potentiel
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 5v14M6 13l6 6 6-6"/></svg></a>
+    <p class="services">Débouchage <i>•</i> Curage <i>•</i> Inspection caméra <i>•</i> Vidange</p>
+  </div>
+</section>
+
+<!-- 2. SIMULATEUR -->
+<section class="sim" id="simulateur">
+  <div class="wrap">
+    <div class="sec-head">
+      <span class="eyebrow">Simulateur</span>
+      <h2>Estimez votre <span class="blue">potentiel</span></h2>
+    </div>
+
+    <div class="sim-grid">
+      <div class="panel">
+        <div class="field">
+          <div class="field-top">
+            <label for="clients">Clients par mois</label>
+            <output class="val" id="clientsOut" for="clients">80</output>
+          </div>
+          <input type="range" id="clients" min="0" max="200" step="1" value="80">
+          <div class="scale"><span>0</span><span>200</span></div>
+        </div>
+
+        <div class="field">
+          <div class="field-top">
+            <label for="conv"><span class="tag">Votre hypothèse</span>Part de clients convertis en assainissement</label>
+            <output class="val" id="convOut" for="conv">5&nbsp;%</output>
+          </div>
+          <input type="range" id="conv" min="1" max="80" step="1" value="5" aria-describedby="convHelp">
+          <div class="scale"><span>1 %</span><span>80 %</span></div>
+          <p class="help" id="convHelp">Hypothèse à ajuster selon les besoins de vos clients.</p>
+        </div>
+
+        <div class="field">
+          <span class="lbl" id="panierLbl">Panier moyen par intervention</span>
+          <div class="seg" role="radiogroup" aria-labelledby="panierLbl">
+            <input type="radio" name="panier" id="p1500" value="1500" checked><label for="p1500">1 500 €</label>
+            <input type="radio" name="panier" id="p2000" value="2000"><label for="p2000">2 000 €</label>
+          </div>
+        </div>
+      </div>
+
+      <div class="panel results" aria-live="polite">
+        <span class="eyebrow">Chiffre d’affaires potentiel</span>
+        <div class="res-pair">
+          <div class="res-row"><span class="k">Par mois</span><span class="res-big" id="caMois">6 000 €</span></div>
+          <div class="res-row"><span class="k">Par an</span><span class="res-big accent" id="caAn">72 000 €</span></div>
+        </div>
+        <p class="res-mini">Soit environ <strong id="nbInter">4</strong> intervention(s) par mois.</p>
+        <p class="formula" id="formula">80 clients × 5 % × 1 500 €</p>
+        <p class="disclaimer" role="note">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="M12 8v5M12 16.5v.01"/></svg>
+          <span>Simulation indicative, sans garantie. CA avant déduction des coûts et investissements. Projection annuelle à activité constante.</span>
+        </p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- 3. BÉNÉFICE -->
+<section id="benefice">
+  <div class="wrap">
+    <div class="sec-head">
+      <h2>Que pourrait changer ce potentiel <span class="blue">pour votre entreprise&nbsp;?</span></h2>
+      <p class="lead">Une activité rentable pourrait contribuer à financer vos équipes, absorber vos charges et dégager davantage de bénéfices. L’audit permet d’étudier ce qui serait réellement envisageable chez vous.</p>
+    </div>
+    <div class="gain-grid">
+      <div class="gain">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="9" cy="8" r="3.2"/><path d="M3 20c0-3.3 2.7-6 6-6s6 2.7 6 6"/><circle cx="17.5" cy="9" r="2.5"/><path d="M16 14.2c2.9-.4 5 1.8 5 4.8"/></svg>
+        <h3>Financer vos équipes</h3>
+      </div>
+      <div class="gain">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 3l8 3v6c0 4.5-3.4 8-8 9-4.6-1-8-4.5-8-9V6z"/><path d="M8.5 12l2.5 2.5 4.5-5"/></svg>
+        <h3>Mieux couvrir vos charges</h3>
+      </div>
+      <div class="gain">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 19l5-6 4 3 7-9"/><path d="M15 7h5v5"/></svg>
+        <h3>Développer vos bénéfices</h3>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- 4. ACCOMPAGNEMENT + PRÉSENTATION -->
+<section class="duo" id="equipe">
+  <div class="wrap duo-grid">
+    <figure class="duo-photo">
+      <img src="media/franck-yanis.jpg" alt="Franck et Yanis devant un camion équipé pour l’assainissement" width="1177" height="1156" loading="lazy">
+      <figcaption class="who">
+        <p><b>Franck</b>Près de 30 ans d’expérience en assainissement.</p>
+        <p><b>Yanis</b>Acquisition de clients et développement commercial.</p>
+      </figcaption>
+    </figure>
+    <div class="duo-copy">
+      <span class="eyebrow">Notre accompagnement</span>
+      <h2>Le terrain et le commercial, <span class="blue">réunis.</span></h2>
+      <ol class="steps">
+        <li>Évaluer votre potentiel.</li>
+        <li class="with-media"><span>Préparer les prestations, le matériel et l’organisation.</span>
+          <figure>
+            <img src="media/camion.jpg" alt="Camion d’intervention assainissement vu de profil" width="1200" height="607" loading="lazy">
+            <figcaption>Le matériel adapté aux prestations retenues.</figcaption>
+          </figure>
+        </li>
+        <li>Développer les ventes auprès de vos clients et de nouveaux prospects.</li>
+      </ol>
+    </div>
+  </div>
+</section>
+
+<!-- 5. CONCLUSION + FAQ -->
+<section class="next">
+  <div class="wrap">
+    <div class="next-box">
+      <h2>Faisons le point sur votre potentiel</h2>
+      <p>Nous vous recontacterons pour organiser votre audit 100&nbsp;% gratuit et sans engagement.</p>
+    </div>
+  </div>
+</section>
+
+<section class="faq" id="faq">
+  <div class="wrap">
+    <div class="sec-head"><span class="eyebrow">Questions fréquentes</span></div>
+    <div class="faq-list">
+      <details>
+        <summary>L’audit est-il vraiment gratuit&nbsp;?</summary>
+        <p>Oui. L’audit est 100&nbsp;% gratuit et sans engagement. Il sert à savoir si l’assainissement est pertinent pour votre entreprise.</p>
+      </details>
+      <details>
+        <summary>Faut-il déjà avoir du matériel&nbsp;?</summary>
+        <p>Non. Le choix du matériel fait partie de l’accompagnement, selon les prestations retenues, pour éviter les investissements inutiles.</p>
+      </details>
+      <details>
+        <summary>Que se passe-t-il après ma demande&nbsp;?</summary>
+        <p>Nous vous appelons pour fixer un échange. Nous étudions votre activité, puis nous vous donnons notre avis sur le potentiel de l’assainissement chez vous.</p>
+      </details>
+    </div>
+  </div>
+</section>
+
+</main>
+
+<footer>
+  <div class="wrap">
+    <span>© Franck &amp; Yanis Assainissement</span>
+    <span>Simulation indicative · Audit gratuit et sans engagement</span>
+  </div>
+</footer>
+
+<script>
+/* ===== SIMULATEUR ===== */
+const eur = new Intl.NumberFormat("fr-FR",{style:"currency",currency:"EUR",maximumFractionDigits:0});
+const nf = new Intl.NumberFormat("fr-FR",{maximumFractionDigits:1});
+const $ = id => document.getElementById(id);
+const clients = $("clients"), conv = $("conv");
+
+function fill(r){ const p = (r.value - r.min) / (r.max - r.min) * 100; r.style.setProperty("--p", p + "%"); }
+function calc(){
+  const c = +clients.value, t = +conv.value;
+  const panier = +document.querySelector('input[name="panier"]:checked').value;
+  const inter = c * t / 100;
+  const mois = inter * panier;
+  $("clientsOut").textContent = c;
+  $("convOut").textContent = t + " %";
+  $("caMois").textContent = eur.format(mois);
+  $("caAn").textContent = eur.format(mois * 12);
+  $("nbInter").textContent = nf.format(inter);
+  $("formula").textContent = `${c} clients × ${t} % × ${eur.format(panier)} = ${eur.format(mois)} / mois`;
+  fill(clients); fill(conv);
+}
+[clients, conv].forEach(r => r.addEventListener("input", calc));
+document.querySelectorAll('input[name="panier"]').forEach(r => r.addEventListener("change", calc));
+calc();
+</script>
+
+</body></html>
